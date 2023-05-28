@@ -22,9 +22,9 @@ node {
  ])
 
  stage("build") {
+    def gitUrl = "https://github.com/azgrth/jenkins.git"
+    def branch_name = "main"  
     checkout([
-        def gitUrl = https://github.com/azgrth/jenkins.git
-        def branch_name = main
         $class: 'GitSCM',
         branches: [[name: '*/${branch_name}']],
         doGenerateSubmoduleConfigurations: false,
