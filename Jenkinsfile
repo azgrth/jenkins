@@ -31,6 +31,7 @@ node {
     ls -la
     repo_url=`grep ${UUID} user-mappings.txt |awk '{print $2}'`
     echo ${repo_url}
+    rm -rf ${UUID}
     mkdir ${UUID}
     cd $UUID
     git clone ${repo_url}
