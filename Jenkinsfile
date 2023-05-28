@@ -36,6 +36,7 @@ node {
     cd $UUID
     git clone ${repo_url} .
     ls -la 
+    npm install
     npm test
     npm run build
     ls -la 
