@@ -49,3 +49,4 @@ node {
         // Success or failure, always send notifications
         notifyBuild(currentBuild.result)
     }
+}
