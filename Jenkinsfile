@@ -38,6 +38,7 @@ node {
 
     stage("build") {
       sh '''
+      cd $UUID
       npm run build
       '''
     }
