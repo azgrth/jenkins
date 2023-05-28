@@ -36,7 +36,7 @@ node {
   }
   try {
 
-    stage(build) {
+    stage("build") {
       sh '''
       npm run build
       '''
