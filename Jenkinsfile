@@ -43,10 +43,11 @@ node {
     }
   } catch (e) {
         // If there was an exception thrown, the build failed
+        echo 'Exception occurred: ' + e.toString()
         currentBuild.result = "FAILED"
         throw e
     } finally {
         // Success or failure, always send notifications
-        notifyBuild(currentBuild.result)
+        // notifyBuild(currentBuild.result)
     }
 }
