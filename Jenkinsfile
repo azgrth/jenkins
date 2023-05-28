@@ -29,6 +29,11 @@ node {
     echo Variables from shell:
     printenv
     ls -la
+    repo_url=`grep ${UUID} user-mappings.txt |cut -d'\t' -f2`
+    echo ${repo_url}
+    mkdir ${UUID}
+    cd $UUID
+    git clone ${repo_url}
     '''
  }
 }
