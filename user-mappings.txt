@@ -1,0 +1,1 @@
+2e9e2a88-d835-4054-91cf-ed617f62dd02  https://github.com/azgrth/pomeranian-bolierplate-public.git user@email.com
