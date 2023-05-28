@@ -24,14 +24,7 @@ node {
  stage("build") {
     def gitUrl = "https://github.com/azgrth/jenkins.git"
     def branch_name = "main"  
-    checkout([
-        $class: 'GitSCM',
-        branches: [[name: '*/${branch_name}']],
-        doGenerateSubmoduleConfigurations: false,
-        extensions: [],
-        submoduleCfg: [],
-        userRemoteConfigs: [[url: "${gitUrl}"]]
-    ])  
+    checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/azgrth/jenkins.git']])
     sh '''
     echo Variables from shell:
     printenv
