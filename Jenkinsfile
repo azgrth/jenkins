@@ -22,10 +22,20 @@ node {
  ])
 
  stage("build") {
-  sh '''
-  echo Variables from shell:
-  printenv
-  ls -la
-  '''
+    checkout([
+        def gitUrl = https://github.com/azgrth/jenkins.git
+        def branch_name = main
+        $class: 'GitSCM',
+        branches: [[name: '*/${branch_name}']],
+        doGenerateSubmoduleConfigurations: false,
+        extensions: [],
+        submoduleCfg: [],
+        userRemoteConfigs: [[url: "${gitUrl}"]]
+    ])  
+    sh '''
+    echo Variables from shell:
+    printenv
+    ls -la
+    '''
  }
 }
