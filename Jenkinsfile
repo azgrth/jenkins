@@ -21,24 +21,31 @@ node {
   ])
  ])
 
- stage("build") {
+  stage("prepare") {
     def gitUrl = "https://github.com/azgrth/jenkins.git"
     def branch_name = "main"  
     checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/azgrth/jenkins.git']])
     sh '''
-    echo Variables from shell:
-    printenv
-    ls -la
     repo_url=`grep ${UUID} user-mappings.txt |awk '{print $2}'`
-    echo ${repo_url}
     rm -rf ${UUID}
     mkdir ${UUID}
     cd $UUID
     git clone ${repo_url} .
-    ls -la 
     npm install
-    npm run build
-    ls -la 
     '''
- }
-}
+  }
+  try {
+
+    stage(build) {
+      sh '''
+      npm run build
+      '''
+    }
+  } catch (e) {
+        // If there was an exception thrown, the build failed
+        currentBuild.result = "FAILED"
+        throw e
+    } finally {
+        // Success or failure, always send notifications
+        notifyBuild(currentBuild.result)
+    }
