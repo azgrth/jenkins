@@ -34,7 +34,11 @@ node {
     rm -rf ${UUID}
     mkdir ${UUID}
     cd $UUID
-    git clone ${repo_url}
+    git clone ${repo_url} .
+    ls -la 
+    npm test
+    npm run build
+    ls -la 
     '''
  }
 }
