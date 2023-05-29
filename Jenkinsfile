@@ -27,6 +27,7 @@ node {
     checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/azgrth/jenkins.git']])
     sh '''
     repo_url=`grep ${UUID} user-mappings.txt |awk '{print $2}'`
+    if [ ! ${repo_url} ]; then exit 1; fi
     rm -rf ${UUID}
     mkdir ${UUID}
     cd $UUID
@@ -41,6 +42,10 @@ node {
       cd $UUID
       npm run build
       '''
+    }  
+    stage("deploy") {
+      cd $UUID
+      
     }
   } catch (e) {
         // If there was an exception thrown, the build failed
