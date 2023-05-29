@@ -46,19 +46,19 @@ node {
     stage("deploy") {
       def ivu_ritpom_app1 = [:]
       ivu_ritpom_app1.name = "ivu_ritpom_app1"
-      ivu_ritpom_app1.host = 192.168.10.221
+      ivu_ritpom_app1.host = "192.168.10.221"
       ivu_ritpom_app1.port = 22
       ivu_ritpom_app1.allowAnyHosts = true
 
       def ivu_ritpom_app2 = [:]
       ivu_ritpom_app2.name = "ivu_ritpom_app2"
-      ivu_ritpom_app2.host = 192.168.10.222
+      ivu_ritpom_app2.host = "192.168.10.222"
       ivu_ritpom_app2.port = 22
       ivu_ritpom_app2.allowAnyHosts = true
 
       def ivu_ritpom_app3 = [:]
       ivu_ritpom_app3.name = "ivu_ritpom_app3"
-      ivu_ritpom_app3.host = 192.168.10.223
+      ivu_ritpom_app3.host = "192.168.10.223"
       ivu_ritpom_app3.port = 22
       ivu_ritpom_app3.allowAnyHosts = true      
 
