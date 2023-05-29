@@ -44,43 +44,43 @@ node {
       '''
     }
     stage("deploy") {
-      def ivu-ritpom-app1 = [:]
-      ivu-ritpom-app1.name = "ivu-ritpom-app1"
-      ivu-ritpom-app1.host = 192.168.10.221
-      ivu-ritpom-app1.port = 22
-      ivu-ritpom-app1.allowAnyHosts = true
+      def ivu_ritpom_app1 = [:]
+      ivu_ritpom_app1.name = "ivu_ritpom_app1"
+      ivu_ritpom_app1.host = 192.168.10.221
+      ivu_ritpom_app1.port = 22
+      ivu_ritpom_app1.allowAnyHosts = true
 
-      def ivu-ritpom-app2 = [:]
-      ivu-ritpom-app2.name = "ivu-ritpom-app2"
-      ivu-ritpom-app2.host = 192.168.10.222
-      ivu-ritpom-app2.port = 22
-      ivu-ritpom-app2.allowAnyHosts = true
+      def ivu_ritpom_app2 = [:]
+      ivu_ritpom_app2.name = "ivu_ritpom_app2"
+      ivu_ritpom_app2.host = 192.168.10.222
+      ivu_ritpom_app2.port = 22
+      ivu_ritpom_app2.allowAnyHosts = true
 
-      def ivu-ritpom-app3 = [:]
-      ivu-ritpom-app3.name = "ivu-ritpom-app3"
-      ivu-ritpom-app3.host = 192.168.10.223
-      ivu-ritpom-app3.port = 22
-      ivu-ritpom-app3.allowAnyHosts = true      
+      def ivu_ritpom_app3 = [:]
+      ivu_ritpom_app3.name = "ivu_ritpom_app3"
+      ivu_ritpom_app3.host = 192.168.10.223
+      ivu_ritpom_app3.port = 22
+      ivu_ritpom_app3.allowAnyHosts = true      
 
       cd $UUID
       withCredentials([sshUserPrivateKey(credentialsId: '4cabd9ec-56a3-4da3-a644-cb677972401c', passwordVariable: 'password', usernameVariable: 'userName')]) {
-        ivu-ritpom-app1.user = userName
-        ivu-ritpom-app1.password = password
+        ivu_ritpom_app1.user = userName
+        ivu_ritpom_app1.password = password
 
-        ivu-ritpom-app2.user = userName
-        ivu-ritpom-app2.password = password
+        ivu_ritpom_app2.user = userName
+        ivu_ritpom_app2.password = password
 
-        ivu-ritpom-app3.user = userName
-        ivu-ritpom-app3.password = password
+        ivu_ritpom_app3.user = userName
+        ivu_ritpom_app3.password = password
 
-        sshCommand remote: ivu-ritpom-app1, command: "if [ -d /var/lib/www/rockthecode/${UUID} ]; then mkdir -p; fi"        
-        sshPut remote: ivu-ritpom-app1, from: 'build', into: '/var/lib/www/rockthecode/${UUID}'
+        sshCommand remote: ivu_ritpom_app1, command: "if [ -d /var/lib/www/rockthecode/${UUID} ]; then mkdir -p; fi"        
+        sshPut remote: ivu_ritpom_app1, from: 'build', into: '/var/lib/www/rockthecode/${UUID}'
 
-        sshCommand remote: ivu-ritpom-app2, command: "if [ -d /var/lib/www/rockthecode/${UUID} ]; then mkdir -p; fi"        
-        sshPut remote: ivu-ritpom-app2, from: 'build', into: '/var/lib/www/rockthecode/${UUID}'
+        sshCommand remote: ivu_ritpom_app2, command: "if [ -d /var/lib/www/rockthecode/${UUID} ]; then mkdir -p; fi"        
+        sshPut remote: ivu_ritpom_app2, from: 'build', into: '/var/lib/www/rockthecode/${UUID}'
 
-        sshCommand remote: ivu-ritpom-app3, command: "if [ -d /var/lib/www/rockthecode/${UUID} ]; then mkdir -p; fi"        
-        sshPut remote: ivu-ritpom-app3, from: 'build', into: '/var/lib/www/rockthecode/${UUID}'
+        sshCommand remote: ivu_ritpom_app3, command: "if [ -d /var/lib/www/rockthecode/${UUID} ]; then mkdir -p; fi"        
+        sshPut remote: ivu_ritpom_app3, from: 'build', into: '/var/lib/www/rockthecode/${UUID}'
     }
 
   } catch (e) {
