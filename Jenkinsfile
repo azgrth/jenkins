@@ -63,7 +63,7 @@ node {
       ivu_ritpom_app3.allowAnyHosts = true      
 
       // cd $UUID
-      withCredentials([sshUserPrivateKey(credentialsId: '4cabd9ec-56a3-4da3-a644-cb677972401c', passwordVariable: 'password', usernameVariable: 'userName')]) {
+      withCredentials([usernamePassword(credentialsId: '4cabd9ec-56a3-4da3-a644-cb677972401c', passwordVariable: 'password', usernameVariable: 'userName')]) {
         ivu_ritpom_app1.user = userName
         ivu_ritpom_app1.password = password
 
