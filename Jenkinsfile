@@ -79,7 +79,7 @@ node {
         def file_source = user_id + '/build'
         def file_dest = "/var/lib/www/rockthecode/" + user_id
         sshCommand remote: ivu_ritpom_app1, command: "if [ ! -d /var/lib/www/rockthecode/$user_id ]; then mkdir -p /var/lib/www/rockthecode/$user_id; fi"
-        sshPut remote: ivu_ritpom_app1, from: "$user_id/build", into: "/var/lib/www/rockthecode/$user_id"
+        sshPut remote: ivu_ritpom_app1, from: "$user_id/build/", into: "/var/lib/www/rockthecode/$user_id"
 
         // sshCommand remote: ivu_ritpom_app2, command: "if [ -d /var/lib/www/rockthecode/${user_id} ]; then mkdir -p; fi"        
         // sshPut remote: ivu_ritpom_app2, from: 'build', into: '/var/lib/www/rockthecode/${user_id}'
