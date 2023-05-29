@@ -81,8 +81,8 @@ node {
 
         sshCommand remote: ivu_ritpom_app3, command: "if [ -d /var/lib/www/rockthecode/${UUID} ]; then mkdir -p; fi"        
         sshPut remote: ivu_ritpom_app3, from: 'build', into: '/var/lib/www/rockthecode/${UUID}'
+      }
     }
-
   } catch (e) {
         // If there was an exception thrown, the build failed
         echo 'Exception occurred: ' + e.toString()
