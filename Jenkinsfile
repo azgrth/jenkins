@@ -73,13 +73,14 @@ node {
           ivu_ritpom_app3.user = userName
           ivu_ritpom_app3.password = password
 
-          sshCommand remote: ivu_ritpom_app1, command: "if [ ! -d /var/lib/www/rockthecode/$user_id ]; then mkdir -p /var/lib/www/rockthecode/$user_id; fi"
+          sshCommand remote: ivu_ritpom_app1, command: "rm -rf /var/lib/www/rockthecode/$user_id; mkdir -p /var/lib/www/rockthecode/$user_id;"
           sshPut remote: ivu_ritpom_app1, from: ".", into: "/var/lib/www/rockthecode/$user_id"
 
           sshCommand remote: ivu_ritpom_app2, command: "if [ ! -d /var/lib/www/rockthecode/$user_id ]; then mkdir -p /var/lib/www/rockthecode/$user_id; fi"
+          sshCommand remote: ivu_ritpom_app1, command: "rm -rf /var/lib/www/rockthecode/$user_id; mkdir -p /var/lib/www/rockthecode/$user_id;"
           sshPut remote: ivu_ritpom_app1, from: ".", into: "/var/lib/www/rockthecode/$user_id"
 
-          sshCommand remote: ivu_ritpom_app3, command: "if [ ! -d /var/lib/www/rockthecode/$user_id ]; then mkdir -p /var/lib/www/rockthecode/$user_id; fi"
+          sshCommand remote: ivu_ritpom_app1, command: "rm -rf /var/lib/www/rockthecode/$user_id; mkdir -p /var/lib/www/rockthecode/$user_id;"
           sshPut remote: ivu_ritpom_app1, from: ".", into: "/var/lib/www/rockthecode/$user_id"
         }
       }
