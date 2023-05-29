@@ -26,6 +26,7 @@ node {
     def branch_name = "main"  
     checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/azgrth/jenkins.git']])
     sh '''
+    echo ${user_id} 
     repo_url=`grep ${user_id} user-mappings.txt |awk '{print $2}'`
     if [ ! ${repo_url} ]; then exit 1; fi
     rm -rf ${user_id}
