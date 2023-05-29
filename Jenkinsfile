@@ -72,11 +72,14 @@ node {
 
         ivu_ritpom_app3.user = userName
         ivu_ritpom_app3.password = password
-
+        
+        echo UUID
+        echo env.UUID
+        
         def file_source = UUID + '/build'
         def file_dest = "/var/lib/www/rockthecode/" + UUID
         // sshCommand remote: ivu_ritpom_app1, command: "if [ -d /var/lib/www/rockthecode/" + UUID + "]; then mkdir -p /var/lib/www/rockthecode/" + UUID + "; fi"
-        sshPut remote: ivu_ritpom_app1, from: file_source, into: file_dest
+        // sshPut remote: ivu_ritpom_app1, from: file_source, into: file_dest
 
         // sshCommand remote: ivu_ritpom_app2, command: "if [ -d /var/lib/www/rockthecode/${UUID} ]; then mkdir -p; fi"        
         // sshPut remote: ivu_ritpom_app2, from: 'build', into: '/var/lib/www/rockthecode/${UUID}'
