@@ -62,30 +62,26 @@ node {
       ivu_ritpom_app3.port = 22
       ivu_ritpom_app3.allowAnyHosts = true      
 
-      // cd $user_id
-      withCredentials([usernamePassword(credentialsId: '4cabd9ec-56a3-4da3-a644-cb677972401c', passwordVariable: 'password', usernameVariable: 'userName')]) {
-        ivu_ritpom_app1.user = userName
-        ivu_ritpom_app1.password = password
+      dir("$user_id/build") {
+        withCredentials([usernamePassword(credentialsId: '4cabd9ec-56a3-4da3-a644-cb677972401c', passwordVariable: 'password', usernameVariable: 'userName')]) {
+          ivu_ritpom_app1.user = userName
+          ivu_ritpom_app1.password = password
 
-        ivu_ritpom_app2.user = userName
-        ivu_ritpom_app2.password = password
+          ivu_ritpom_app2.user = userName
+          ivu_ritpom_app2.password = password
 
-        ivu_ritpom_app3.user = userName
-        ivu_ritpom_app3.password = password
-        
-        echo user_id
-        echo env.user_id
+          ivu_ritpom_app3.user = userName
+          ivu_ritpom_app3.password = password
 
-        def file_source = user_id + '/build'
-        def file_dest = "/var/lib/www/rockthecode/" + user_id
-        sshCommand remote: ivu_ritpom_app1, command: "if [ ! -d /var/lib/www/rockthecode/$user_id ]; then mkdir -p /var/lib/www/rockthecode/$user_id; fi"
-        sshPut remote: ivu_ritpom_app1, from: "$user_id/build/", into: "/var/lib/www/rockthecode/$user_id"
+          sshCommand remote: ivu_ritpom_app1, command: "if [ ! -d /var/lib/www/rockthecode/$user_id ]; then mkdir -p /var/lib/www/rockthecode/$user_id; fi"
+          sshPut remote: ivu_ritpom_app1, from: ".", into: "/var/lib/www/rockthecode/$user_id"
 
-        // sshCommand remote: ivu_ritpom_app2, command: "if [ -d /var/lib/www/rockthecode/${user_id} ]; then mkdir -p; fi"        
-        // sshPut remote: ivu_ritpom_app2, from: 'build', into: '/var/lib/www/rockthecode/${user_id}'
+          // sshCommand remote: ivu_ritpom_app2, command: "if [ -d /var/lib/www/rockthecode/${user_id} ]; then mkdir -p; fi"        
+          // sshPut remote: ivu_ritpom_app2, from: 'build', into: '/var/lib/www/rockthecode/${user_id}'
 
-        // sshCommand remote: ivu_ritpom_app3, command: "if [ -d /var/lib/www/rockthecode/${user_id} ]; then mkdir -p; fi"        
-        // sshPut remote: ivu_ritpom_app3, from: 'build', into: '/var/lib/www/rockthecode/${user_id}'
+          // sshCommand remote: ivu_ritpom_app3, command: "if [ -d /var/lib/www/rockthecode/${user_id} ]; then mkdir -p; fi"        
+          // sshPut remote: ivu_ritpom_app3, from: 'build', into: '/var/lib/www/rockthecode/${user_id}'
+        }
       }
     }
   } catch (e) {
