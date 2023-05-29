@@ -73,14 +73,14 @@ node {
         ivu_ritpom_app3.user = userName
         ivu_ritpom_app3.password = password
 
-        sshCommand remote: ivu_ritpom_app1, command: "if [ -d /var/lib/www/rockthecode/${UUID} ]; then mkdir -p; fi"        
-        sshPut remote: ivu_ritpom_app1, from: 'build', into: '/var/lib/www/rockthecode/${UUID}'
+        sshCommand remote: ivu_ritpom_app1, command: "if [ -d /var/lib/www/rockthecode/" + UUID + "]; then mkdir -p /var/lib/www/rockthecode/" + UUID + "; fi"        
+        sshPut remote: ivu_ritpom_app1, from: 'build', into: '/var/lib/www/rockthecode/' + UUID
 
-        sshCommand remote: ivu_ritpom_app2, command: "if [ -d /var/lib/www/rockthecode/${UUID} ]; then mkdir -p; fi"        
-        sshPut remote: ivu_ritpom_app2, from: 'build', into: '/var/lib/www/rockthecode/${UUID}'
+        // sshCommand remote: ivu_ritpom_app2, command: "if [ -d /var/lib/www/rockthecode/${UUID} ]; then mkdir -p; fi"        
+        // sshPut remote: ivu_ritpom_app2, from: 'build', into: '/var/lib/www/rockthecode/${UUID}'
 
-        sshCommand remote: ivu_ritpom_app3, command: "if [ -d /var/lib/www/rockthecode/${UUID} ]; then mkdir -p; fi"        
-        sshPut remote: ivu_ritpom_app3, from: 'build', into: '/var/lib/www/rockthecode/${UUID}'
+        // sshCommand remote: ivu_ritpom_app3, command: "if [ -d /var/lib/www/rockthecode/${UUID} ]; then mkdir -p; fi"        
+        // sshPut remote: ivu_ritpom_app3, from: 'build', into: '/var/lib/www/rockthecode/${UUID}'
       }
     }
   } catch (e) {
