@@ -3,7 +3,7 @@ node {
   pipelineTriggers([
    [$class: 'GenericTrigger',
     genericRequestVariables: [
-     [key: 'UUID', regexpFilter: '']
+     [key: 'user_id', regexpFilter: '']
     ],
 
     causeString: 'Triggered on $ref',
@@ -26,11 +26,11 @@ node {
     def branch_name = "main"  
     checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/azgrth/jenkins.git']])
     sh '''
-    repo_url=`grep ${UUID} user-mappings.txt |awk '{print $2}'`
+    repo_url=`grep ${user_id} user-mappings.txt |awk '{print $2}'`
     if [ ! ${repo_url} ]; then exit 1; fi
-    rm -rf ${UUID}
-    mkdir ${UUID}
-    cd $UUID
+    rm -rf ${user_id}
+    mkdir ${user_id}
+    cd $user_id
     git clone ${repo_url} .
     npm install
     '''
@@ -39,7 +39,7 @@ node {
 
     stage("build") {
       sh '''
-      cd $UUID
+      cd $user_id
       npm run build
       '''
     }
@@ -62,7 +62,7 @@ node {
       ivu_ritpom_app3.port = 22
       ivu_ritpom_app3.allowAnyHosts = true      
 
-      // cd $UUID
+      // cd $user_id
       withCredentials([usernamePassword(credentialsId: '4cabd9ec-56a3-4da3-a644-cb677972401c', passwordVariable: 'password', usernameVariable: 'userName')]) {
         ivu_ritpom_app1.user = userName
         ivu_ritpom_app1.password = password
@@ -73,19 +73,19 @@ node {
         ivu_ritpom_app3.user = userName
         ivu_ritpom_app3.password = password
         
-        echo UUID
-        echo env.UUID
-        
-        def file_source = UUID + '/build'
-        def file_dest = "/var/lib/www/rockthecode/" + UUID
-        // sshCommand remote: ivu_ritpom_app1, command: "if [ -d /var/lib/www/rockthecode/" + UUID + "]; then mkdir -p /var/lib/www/rockthecode/" + UUID + "; fi"
+        echo user_id
+        echo env.user_id
+
+        def file_source = user_id + '/build'
+        def file_dest = "/var/lib/www/rockthecode/" + user_id
+        // sshCommand remote: ivu_ritpom_app1, command: "if [ -d /var/lib/www/rockthecode/" + user_id + "]; then mkdir -p /var/lib/www/rockthecode/" + user_id + "; fi"
         // sshPut remote: ivu_ritpom_app1, from: file_source, into: file_dest
 
-        // sshCommand remote: ivu_ritpom_app2, command: "if [ -d /var/lib/www/rockthecode/${UUID} ]; then mkdir -p; fi"        
-        // sshPut remote: ivu_ritpom_app2, from: 'build', into: '/var/lib/www/rockthecode/${UUID}'
+        // sshCommand remote: ivu_ritpom_app2, command: "if [ -d /var/lib/www/rockthecode/${user_id} ]; then mkdir -p; fi"        
+        // sshPut remote: ivu_ritpom_app2, from: 'build', into: '/var/lib/www/rockthecode/${user_id}'
 
-        // sshCommand remote: ivu_ritpom_app3, command: "if [ -d /var/lib/www/rockthecode/${UUID} ]; then mkdir -p; fi"        
-        // sshPut remote: ivu_ritpom_app3, from: 'build', into: '/var/lib/www/rockthecode/${UUID}'
+        // sshCommand remote: ivu_ritpom_app3, command: "if [ -d /var/lib/www/rockthecode/${user_id} ]; then mkdir -p; fi"        
+        // sshPut remote: ivu_ritpom_app3, from: 'build', into: '/var/lib/www/rockthecode/${user_id}'
       }
     }
   } catch (e) {
