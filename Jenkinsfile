@@ -67,24 +67,23 @@ node {
         withCredentials([usernamePassword(credentialsId: '4cabd9ec-56a3-4da3-a644-cb677972401c', passwordVariable: 'password', usernameVariable: 'userName')]) {
           ivu_ritpom_app1.user = userName
           ivu_ritpom_app1.password = password
-
-          ivu_ritpom_app2.user = userName
-          ivu_ritpom_app2.password = password
-
-          ivu_ritpom_app3.user = userName
-          ivu_ritpom_app3.password = password
-
           sshCommand remote: ivu_ritpom_app1, command: "rm -rf /var/lib/www/rockthecode/$user_id|true"
           sshCommand remote: ivu_ritpom_app1, command: "mkdir -p /var/lib/www/rockthecode/$user_id|true"
           sshPut remote: ivu_ritpom_app1, from: ".", into: "/var/lib/www/rockthecode/$user_id"
-
-
+        }
+        withCredentials([usernamePassword(credentialsId: '4cabd9ec-56a3-4da3-a644-cb677972401c', passwordVariable: 'password', usernameVariable: 'userName')]) {
+          ivu_ritpom_app2.user = userName
+          ivu_ritpom_app2.password = password
           sshCommand remote: ivu_ritpom_app2, command: "rm -rf /var/lib/www/rockthecode/$user_id|true"
           sshCommand remote: ivu_ritpom_app2, command: "mkdir -p /var/lib/www/rockthecode/$user_id|true"
           sshPut remote: ivu_ritpom_app2, from: ".", into: "/var/lib/www/rockthecode/$user_id"
-
-          // sshCommand remote: ivu_ritpom_app3, command: "rm -rf /var/lib/www/rockthecode/$user_id; mkdir -p /var/lib/www/rockthecode/$user_id;"
-          // sshPut remote: ivu_ritpom_app3, from: ".", into: "/var/lib/www/rockthecode/$user_id"
+        }
+        withCredentials([usernamePassword(credentialsId: '4cabd9ec-56a3-4da3-a644-cb677972401c', passwordVariable: 'password', usernameVariable: 'userName')]) {        
+          ivu_ritpom_app3.user = userName
+          ivu_ritpom_app3.password = password
+          sshCommand remote: ivu_ritpom_app3, command: "rm -rf /var/lib/www/rockthecode/$user_id|true"
+          sshCommand remote: ivu_ritpom_app3, command: "mkdir -p /var/lib/www/rockthecode/$user_id|true"
+          sshPut remote: ivu_ritpom_app2, from: ".", into: "/var/lib/www/rockthecode/$user_id"
         }
       }
     }
